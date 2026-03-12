@@ -1,7 +1,7 @@
 import asyncio
 from deep_researcher.models.research import Source
 from deep_researcher.config import settings
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 
 ddgs = DDGS()
 

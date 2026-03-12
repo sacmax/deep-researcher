@@ -26,6 +26,8 @@ class PlannerAgent:
                     response_format=SubQuestionList
                 )
                 result = response.choices[0].message.content
-            return {"sub_questions": result.sub_questions}
+                if isinstance(result, str):
+                    result = SubQuestionList.model_validate_json(result)
+                return {"sub_questions": result.sub_questions}
         except Exception:
             return {"sub_questions": [SubQuestion(id="1", question=state["question"], rationale="fallback", priority=5)]}

@@ -22,6 +22,7 @@ dependencies = [
     "rich>=13.0",
     "tavily-python",
     "langgraph-checkpoint-sqlite>=3.0.3",
+    "ddgs>=9.11.3",
 ]
 [project.scripts]
 "deep-researcher" = "deep_researcher.cli:main"

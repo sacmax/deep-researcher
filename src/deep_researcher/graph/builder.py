@@ -1,11 +1,11 @@
-from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.graph import StateGraph, START, END
 from deep_researcher.graph.state import DeepResearcherState
 from deep_researcher.graph.nodes import planner_node, researcher_node, factchecker_node, synthesizer_node
 from deep_researcher.graph.edges import fan_out
-from deep_researcher.config import settings
 
-def build_graph()
+
+def build_graph(checkpointer=None):
+    
     graph = StateGraph(DeepResearcherState)
     # add nodes
     graph.add_node("planner", planner_node)
@@ -19,7 +19,5 @@ def build_graph()
     graph.add_edge("researcher", "factchecker")
     graph.add_edge("factchecker", "synthesizer")
     graph.add_edge("synthesizer", END)
-
-    checkpointer = AsyncSqliteSaver.from_conn_string(settings.DB_PATH)
     return graph.compile(checkpointer=checkpointer)
 

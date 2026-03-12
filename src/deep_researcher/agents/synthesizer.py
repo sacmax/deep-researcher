@@ -31,8 +31,10 @@ class SynthesizerAgent:
                     messages=[{"role": "system", "content": SYSTEM_PROMPT},{"role": "user", "content": USER_PROMPT}],
                     response_format=SynthesisResult
                 )
-                sythesis_results = response.choices[0].message.content
-                return {"report": ResearchReport(question=question, answer=sythesis_results.answer, claims=claims, contradictions=contradictions, knowledge_gaps=sythesis_results.knowledge_gaps, confidence=sythesis_results.overall_confidence, sources=sources, generated_at=datetime.now())}
+                synthesis_results = response.choices[0].message.content
+                if isinstance(synthesis_results, str):
+                        synthesis_results = SynthesisResult.model_validate_json(synthesis_results)
+                return {"report": ResearchReport(question=question, answer=synthesis_results.answer, claims=claims, contradictions=contradictions, knowledge_gaps=synthesis_results.knowledge_gaps, confidence=synthesis_results.overall_confidence, sources=sources, generated_at=datetime.now())}
         except Exception:
              return {"report": ResearchReport(question=question, answer="", claims=[], contradictions=[], knowledge_gaps=[], confidence=0.0, sources=[], generated_at=datetime.now())}
              

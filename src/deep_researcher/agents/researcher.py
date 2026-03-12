@@ -41,6 +41,8 @@ class ResearcherAgent:
                             response_format=ClaimsList
                         )
                 claim_results = response.choices[0].message.content
+                if isinstance(claim_results, str):
+                    claim_results = ClaimsList.model_validate_json(claim_results)
                 return {"branch_results": [BranchResult(sub_question_id=sub_question_id, claims=claim_results.claims_list, search_queries_used=[sub_question], sources=web_result)]}
         except Exception:
             return {"branch_results": [BranchResult(sub_question_id="", claims=[], search_queries_used=[], sources=[])]}
