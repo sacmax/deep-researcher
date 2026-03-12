@@ -9,7 +9,7 @@ class ContradictionResult(BaseModel):
     is_contradiction: bool
     contradiction: Contradiction | None
 
-class FactChecker:
+class FactCheckerAgent:
     def __init__(self, llm_client=None):
         self._llm_client = llm_client
     

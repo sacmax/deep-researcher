@@ -20,7 +20,8 @@ dependencies = [
     "structlog>=24.0",
     "click>=8.0",
     "rich>=13.0",
-    "tavily-python"
+    "tavily-python",
+    "langgraph-checkpoint-sqlite>=3.0.3",
 ]
 [project.scripts]
 "deep-researcher" = "deep_researcher.cli:main"
