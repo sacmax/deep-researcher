@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     TAVILY_API_KEY: SecretStr = SecretStr("")
     LANGFUSE_PUBLIC_KEY: SecretStr = SecretStr("")
     LANGFUSE_SECRET_KEY: SecretStr = SecretStr("")
+    LANGFUSE_HOST: str = "https://us.cloud.langfuse.com"
     
     model_config = {"env_file": ".env"}
 

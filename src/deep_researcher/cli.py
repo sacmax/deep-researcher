@@ -8,6 +8,7 @@ from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from deep_researcher.config import settings
 
 
+
 async def run_graph(question: str):
     async with AsyncSqliteSaver.from_conn_string(settings.DB_PATH) as checkpointer:
         graph = build_graph(checkpointer=checkpointer)

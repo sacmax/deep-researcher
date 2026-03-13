@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from deep_researcher.models.research import SubQuestion
 from deep_researcher.config import settings
 import litellm
-import asyncio
+from langfuse import observe
 
 class SubQuestionList(BaseModel):
     sub_questions: list[SubQuestion]
@@ -13,6 +13,7 @@ class PlannerAgent:
     def __init__(self, llm_client=None):
         self._llm_client = llm_client
 
+    @observe(name="planner")
     async def run(self, state: dict) -> dict:
         try:
 

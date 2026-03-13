@@ -3,6 +3,8 @@ from deep_researcher.models.research import Contradiction
 from deep_researcher.config import settings
 import itertools
 import litellm
+from langfuse import observe
+
 
 
 class ContradictionResult(BaseModel):
@@ -13,6 +15,7 @@ class FactCheckerAgent:
     def __init__(self, llm_client=None):
         self._llm_client = llm_client
     
+    @observe(name="fact_checker")
     async def run(self, state: dict) -> dict:
         self._branch_results = state["branch_results"]
         all_branch_pairs = itertools.combinations(self._branch_results, 2)

@@ -3,6 +3,7 @@ import litellm
 from deep_researcher.config import settings
 from deep_researcher.models.research import ResearchReport
 from datetime import datetime
+from langfuse import observe
 
 
 class SynthesisResult(BaseModel):
@@ -14,6 +15,7 @@ class SynthesizerAgent:
     def __init__(self, llm_client=None):
         self._llm_client = llm_client
     
+    @observe(name="synthesizer")
     async def run(self, state: dict) -> dict:
         question = state["question"]
         claims = [claim for br in state["branch_results"] for claim in br.claims]

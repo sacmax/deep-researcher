@@ -10,7 +10,7 @@ dependencies = [
     "langgraph>=0.2",
     "langchain-core>=0.3",
     "litellm>=1.40",
-    "langfuse>=2.0",
+    "langfuse>=3.0,<4.0",
     "duckduckgo-search>=6.0",
     "trafilatura>=1.9",
     "httpx>=0.27",
@@ -26,3 +26,12 @@ dependencies = [
 ]
 [project.scripts]
 "deep-researcher" = "deep_researcher.cli:main"
+
+[project.optional-dependencies]
+  dev = [
+      "pytest",
+      "pytest-asyncio",
+  ]
+
+[tool.pytest.ini_options]
+  asyncio_mode = "auto"

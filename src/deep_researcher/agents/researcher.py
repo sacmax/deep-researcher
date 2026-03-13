@@ -5,6 +5,7 @@ from deep_researcher.tools.web_search import web_search
 from deep_researcher.tools.page_extractor import extract_page
 from pydantic import BaseModel, Field
 import litellm
+from langfuse import observe
 
 class ClaimsList(BaseModel):
     claims_list: list[Claim]
@@ -13,7 +14,7 @@ class ResearcherAgent:
     def __init__(self, llm_client=None):
         self._llm_client = llm_client
 
-    
+    @observe(name="researcher")
     async def run(self, state: dict) -> dict:
         max_results = settings.MAX_SEARCH_RESULTS
         sub_question_id = state["sub_question"].id
