@@ -57,6 +57,14 @@ Knowledge Gaps:
   • The impact of alternative normalization techniques like Layer Normalization.
 ```
 
+## Demo Notebook
+
+To explore the pipeline step-by-step and inspect intermediate outputs (sub-questions, claims per branch, contradictions):
+
+1. Set up the venv: `uv venv && uv pip install -e .`
+2. Add your `OPENAI_API_KEY` to `.env`
+3. Launch: `uv run jupyter notebook notebooks/demo.ipynb`
+
 ## Configuration
 
 All settings can be overridden via environment variables:
